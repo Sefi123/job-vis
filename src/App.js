@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Button } from '@material-tailwind/react';
 import AuthRoutes from "./routes/AuthRoutes";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
 import './App.css';
 
 function App() {
@@ -13,9 +14,7 @@ function App() {
     return "auth";
   };
   return (
-    // <div style={{height: "100vh", width: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
-    //   <Button>Button</Button>
-    // </div>
+    <div>
     <BrowserRouter>
       <Routes>
         <Route
@@ -28,6 +27,8 @@ function App() {
         {/* <Route path="/data-integrity" element={<Data />} /> */}
       </Routes>
     </BrowserRouter>
+    <Footer/>
+    </div>
   );
 }
 
