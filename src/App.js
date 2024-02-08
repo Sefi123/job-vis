@@ -1,10 +1,13 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Button } from '@material-tailwind/react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
 import AuthRoutes from "./routes/AuthRoutes";
 import Home from "./pages/Home";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
-import './App.css';
+import "./theme";
+
+import JobList from "./pages/JobList";
 
 function App() {
   const checkProtectedRoute = () => {
@@ -15,19 +18,20 @@ function App() {
   };
   return (
     <div>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate replace to={checkProtectedRoute()} />}
-        />
-        <Route path="/auth/*" element={<AuthRoutes />} />
-        {/* <Route path="/app/*" element={<AppRoutes />} /> */}
-         <Route path="/home" element={<Home />} />
-        {/* <Route path="/data-integrity" element={<Data />} /> */}
-      </Routes>
-    </BrowserRouter>
-    <Footer/>
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate replace to={checkProtectedRoute()} />}
+          />
+          <Route path="/auth/*" element={<AuthRoutes />} />
+          {/* <Route path="/app/*" element={<AppRoutes />} /> */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/job-list" element={<JobList />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
     </div>
   );
 }

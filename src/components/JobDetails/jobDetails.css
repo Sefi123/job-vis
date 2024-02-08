@@ -1,0 +1,107 @@
+.job-detail-container {
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.jobDetail-title {
+  color: var(--Gray-Black-500, #1d1f2c);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 120%; /* 38.4px */
+  margin-bottom: 12px;
+}
+
+.jobDetail-workType-container {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.jobDetail-workType-container > div:first-child {
+  padding-left: 0px !important;
+}
+
+.jobDetail-workType {
+  color: var(--Gray-Black-500, #1d1f2c);
+  font-size: 14px;
+  line-height: 120%; /* 21.6px */
+  padding: 0px 16px 0px 16px;
+}
+
+.jobDetail-typeWithBorder {
+  border-right: 1px solid #b5c6f1;
+}
+
+.jobDetail-salary-title {
+  color: var(--Gray-Black-400, #4a4c56);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 120%; /* 19.2px */
+  margin-bottom: 8px;
+}
+
+.jobDetail-salary {
+  color: var(--Gray-Black-500, #1d1f2c);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 120%; /* 21.6px */
+}
+
+.jobDetail-salary-duration {
+  color: var(--Gray-Black-200, #a5a5ab);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 160%; /* 19.2px */
+}
+
+.jobCardButtons {
+  display: flex;
+  width: 177px;
+  height: 46px;
+  padding: 17px var(--12px, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--12px, 12px);
+}
+
+.applyButton {
+  background: var(--Blue-blue-500, #164ed4);
+  color: var(--W, #fff);
+  font-size: 14px;
+}
+
+.jobDetail-heading {
+  color: var(--Black-01, #1b2124);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 120%;
+  text-transform: capitalize;
+}
+
+.jobDetail-description {
+  color: var(--Gray-Black-400, #4a4c56);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  text-transform: capitalize;
+}
+
+.responsibility-detail {
+  color: var(--Gray-Black-400, #4a4c56);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 170%;
+  text-transform: capitalize;
+}
+
+.qualification-detail {
+  color: var(--Gray-Black-400, #4a4c56);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 170%;
+  text-transform: capitalize;
+}

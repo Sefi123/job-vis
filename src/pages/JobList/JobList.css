@@ -1,0 +1,37 @@
+.jobs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tags-list {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  align-items: center;
+  margin: 60px 0px 60px 0px;
+  flex-wrap: wrap;
+}
+
+.tag-container {
+  display: flex;
+  height: var(--48px, 48px);
+  padding: var(--12px, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--12px, 12px);
+  border: 1px solid var(--Gray-Black-100, #d2d2d5);
+  width: fit-content;
+  cursor: pointer;
+}
+
+.all-jobs-title {
+  color: var(--Grayscale-60, #636366);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 120% */
+  letter-spacing: 0.1px;
+}
