@@ -1,0 +1,33 @@
+.otherPageOptions {
+  color: var(--Gray-Black-400, #4a4c56);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 120%; /* 21.6px */
+}
+
+.profile-invoice-section {
+  color: var(--Gray-Black-500, #1d1f2c);
+  font-size: 2rem;
+  /* font-weight: 600; */
+  line-height: 120%; /* 38.4px */
+}
+
+.userDetailTitle {
+  color: var(--Gray-Black-500, #1d1f2c);
+  font-size: 1.5rem;
+  /* font-weight: 500; */
+  line-height: 120%; /* 28.8px */
+}
+
+.userDetailValue {
+  color: var(--Gray-Black-500, #1d1f2c);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 120%; /* 24px */
+}
+
+.invoiceInsertText {
+  color: var(--Gray-Black-400, #4a4c56);
+  font-size: 1.2rem;
+  line-height: 120%; /* 24px */
+}

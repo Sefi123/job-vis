@@ -9,7 +9,7 @@ import {
 import "./JobCard.css";
 import JobDetails from "../JobDetails";
 
-const JobCard = () => {
+const JobCard = ({ appliedJobs }) => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -18,9 +18,9 @@ const JobCard = () => {
   return (
     <>
       <JobDetails open={open} handleClose={handleClose} />
-      <Card className="mt-6 w-[260px] sm:w-[419px]">
+      <Card className="mt-6 w-[260px] border border-[#E8EDFB] sm:w-[419px]">
         <CardBody className="flex flex-col gap-3">
-          <Typography variant="h5" className="card-title">
+          <Typography variant="h5" className="card-title sm:!text-[2rem]">
             Sr. UI/UX Designer
           </Typography>
           <Typography className="card-tag">@Google</Typography>
@@ -44,15 +44,26 @@ const JobCard = () => {
           </div>
         </CardBody>
         <CardFooter className="flex gap-[17px] pt-0">
-          <Button
-            className="detailsButton capitalize"
-            onClick={() => setOpen(!open)}
-          >
-            Details
-          </Button>
-          <Button className="jobCardButtons applyButton capitalize">
-            Apply
-          </Button>
+          {appliedJobs ? (
+            <Button
+              className="w-full capitalize !text-[#EB3D4D] !font-normal bg-[#F6F8FA] text-[14px]"
+              // onClick={() => setOpen(!open)}
+            >
+              Cancel
+            </Button>
+          ) : (
+            <>
+              <Button
+                className="detailsButton capitalize"
+                onClick={() => setOpen(!open)}
+              >
+                Details
+              </Button>
+              <Button className="jobCardButtons applyCardButton capitalize">
+                Apply
+              </Button>
+            </>
+          )}
         </CardFooter>
       </Card>
     </>

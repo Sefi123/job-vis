@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import "./theme";
 
 import JobList from "./pages/JobList";
+import Profile from "./pages/Profile";
+import PaidMemberProfile from "./pages/PaidMemberProfile";
 
 function App() {
   const checkProtectedRoute = () => {
@@ -29,6 +31,8 @@ function App() {
           {/* <Route path="/app/*" element={<AppRoutes />} /> */}
           <Route path="/home" element={<Home />} />
           <Route path="/job-list" element={<JobList />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/paid-user" element={<PaidMemberProfile />} />
         </Routes>
       </BrowserRouter>
       <Footer />
