@@ -1,0 +1,39 @@
+.bannerHome {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.banner-input-wrapper {
+  margin: 15px auto;
+  margin-bottom: 33px;
+}
+.banner-input-content label,
+.banner-input-content input {
+  padding-left: 35px;
+}
+.banner-input-content label::before,
+.banner-input-content label::after {
+  display: none !important;
+}
+.banner-input-content:last-child input {
+  border-left: 1px solid #b5c6f1;
+}
+.banner-input-content:last-child label,
+.banner-input-content:last-child input {
+  padding-left: 45px;
+}
+.toggle-btn-container {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+@media screen and (max-width: 767px) {
+  .banner-input-content:last-child label,
+  .banner-input-content:last-child input {
+    border-left: none;
+    padding-left: 35px;
+  }
+  .toggle-btn-container {
+    gap: 20px;
+  }
+}

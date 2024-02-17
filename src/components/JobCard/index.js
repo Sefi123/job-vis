@@ -18,7 +18,7 @@ const JobCard = ({ appliedJobs }) => {
   return (
     <>
       <JobDetails open={open} handleClose={handleClose} />
-      <Card className="mt-6 w-[260px] border border-[#E8EDFB] sm:w-[419px]">
+      <Card className="mt-6 border border-[#E8EDFB] w-full">
         <CardBody className="flex flex-col gap-3">
           <Typography variant="h5" className="card-title sm:!text-[2rem]">
             Sr. UI/UX Designer
