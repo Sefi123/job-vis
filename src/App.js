@@ -10,6 +10,8 @@ import "./theme";
 import JobList from "./pages/JobList";
 import Profile from "./pages/Profile";
 import PaidMemberProfile from "./pages/PaidMemberProfile";
+import MembershipPlan from "./pages/MembershipPlan";
+import SignUp from "./pages/SignUp";
 
 function App() {
   const checkProtectedRoute = () => {
@@ -29,10 +31,12 @@ function App() {
           />
           <Route path="/auth/*" element={<AuthRoutes />} />
           {/* <Route path="/app/*" element={<AppRoutes />} /> */}
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
           <Route path="/job-list" element={<JobList />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/paid-user" element={<PaidMemberProfile />} />
+          <Route path="/membershipPlan" element={<MembershipPlan />} />
         </Routes>
       </BrowserRouter>
       <Footer />

@@ -1,32 +1,37 @@
 import { Card, Typography } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["Name", "Job", "Employed", ""];
+const TABLE_HEAD = ["Particular", "Duration", "Purchase Date", "Amount"];
 
 const TABLE_ROWS = [
   {
-    name: "John Michael",
-    job: "Manager",
+    particular: "One Time Payment",
+    duration: "For 2 Weeks",
     date: "23/04/18",
+    amount: "$223"
   },
   {
-    name: "Alexa Liras",
-    job: "Developer",
+    particular: "Subscribe Membership",
+    duration: "Per Week",
     date: "23/04/18",
+    amount: "$438"
   },
   {
-    name: "Laurent Perrier",
-    job: "Executive",
+    particular: "One Time Payment",
+    duration: "For 3 Months",
     date: "19/09/17",
+    amount: "$92"
   },
   {
-    name: "Michael Levi",
-    job: "Developer",
+    particular: "One Time Payment",
+    duration: "Per Week",
     date: "24/12/08",
+    amount: "$311"
   },
   {
-    name: "Richard Gran",
-    job: "Manager",
+    particular: "Subscribe Membership",
+    duration: "Per Month",
     date: "04/10/21",
+    amount: "$543"
   },
 ];
 
@@ -39,12 +44,12 @@ const CustomTable = () => {
             {TABLE_HEAD.map((head) => (
               <th
                 key={head}
-                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                className="border-b border-blue-gray-100 bg-[#E8EDFB] p-4"
               >
                 <Typography
                   variant="small"
-                  color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  color="#777980"
+                  className="font-normal text-[1.1rem] text-[#777980] leading-none opacity-70"
                 >
                   {head}
                 </Typography>
@@ -53,44 +58,42 @@ const CustomTable = () => {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, job, date }, index) => (
-            <tr key={name} className="even:bg-blue-gray-50/50">
+          {TABLE_ROWS.map(({ particular, duration, date, amount }, index) => (
+            <tr key={index} className="even:bg-[#F6F8FA]">
               <td className="p-4">
                 <Typography
                   variant="small"
-                  color="blue-gray"
-                  className="font-normal"
+                  // color="blue-gray"
+                  className="font-normal text-[#1D1F2C] text-[1.5rem]"
                 >
-                  {name}
+                  {particular}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography
                   variant="small"
-                  color="blue-gray"
-                  className="font-normal"
+                  // color="blue-gray"
+                  className="font-normal text-[#1D1F2C] text-[1.5rem]"
                 >
-                  {job}
+                  {duration}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography
                   variant="small"
-                  color="blue-gray"
-                  className="font-normal"
+                  // color="blue-gray"
+                  className="font-normal text-[#1D1F2C] text-[1.5rem]"
                 >
                   {date}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography
-                  as="a"
-                  href="#"
                   variant="small"
-                  color="blue-gray"
-                  className="font-medium"
+                  // color="blue-gray"
+                  className="font-normal text-[#1D1F2C] text-[1.5rem]"
                 >
-                  Edit
+                  {amount}
                 </Typography>
               </td>
             </tr>
