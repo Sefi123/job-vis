@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Collapse,
   Typography,
   IconButton,
   Button,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/icons/logo.png";
+import Arrow from "../../assets/icons/arrow-up-right.png";
+import Profile from "../../assets/images/profile.png";
 
 const Header = () => {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
@@ -22,14 +31,38 @@ const Header = () => {
     };
   }, []);
 
+  const handleloggedIn = () => setLoggedIn(!loggedIn);
+
   const NavList = () => {
     return (
       <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-        <Button color="blue" variant="outlined" className="h-[40px]">
+        {/* <Button
+          color="blue"
+          variant="outlined"
+          className="h-[40px]"
+          onClick={() => navigate("/signup")}
+        >
           Sign Up
-        </Button>
+        </Button> */}
 
-        <Button color="blue">Log In</Button>
+        <Button
+          variant="outlined"
+          color="#164ED4"
+          className="border-[#164ED4] text-[#164ED4] py-3 px-6 capitalize text-[16px]"
+          onClick={() => {
+            handleloggedIn();
+            navigate("/auth");
+          }}
+        >
+          Log In
+        </Button>
+        <button
+          className="flex items-center gap-2 p-3 tracking-wide text-white transition-colors duration-200 transform bg-[#164ED4] rounded-md hover:bg-[#164ED4] focus:outline-none focus:bg-[#164ED4]"
+          onClick={() => navigate("/signup")}
+        >
+          <span>Sign Up</span>
+          <img src={Arrow} alt="arrow" width={20} />
+        </button>
       </ul>
     );
   };
@@ -37,9 +70,35 @@ const Header = () => {
     <Navbar className="mx-auto max-w-screen-3xl px-6 py-3 rounded-[0px]">
       <div className="mx-auto max-w-[1320px]">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <img src={Logo} alt="Logo" width={144} height={37} />
+          <img
+            src={Logo}
+            alt="Logo"
+            width={144}
+            height={37}
+            className="cursor-pointer"
+            onClick={() => navigate("/home")}
+          />
           <div className="hidden lg:block">
-            <NavList />
+            {loggedIn ? (
+              <Menu>
+                <MenuHandler>
+                  <img src={Profile} alt="profile" width={48} />
+                </MenuHandler>
+                <MenuList>
+                  <MenuItem onClick={() => navigate("profile")}>
+                    Profile
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("membershipPlan")}>
+                    Membership
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("paid-user")}>
+                    Paid User
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <NavList />
+            )}
           </div>
           <IconButton
             variant="text"

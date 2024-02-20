@@ -7,8 +7,10 @@ import netflix from "../../assets/images/netflix.svg";
 import amazon from "../../assets/images/amazon.svg";
 import palantir from "../../assets/images/palantir.svg";
 import anthrop from "../../assets/images/anthrop.svg";
+import { useNavigate } from "react-router-dom";
 
 const BannerHome = () => {
+  const navigate = useNavigate();
   return (
     <div
       className="bannerHome py-[40px] md:py-[80px]"
@@ -293,6 +295,7 @@ const BannerHome = () => {
             <button
               class="mx-auto my-[24px] md:my-[48px] flex justify-center items-center gap-[8px] select-none rounded-lg bg-[#164ED4] p-[16px] max-w-[222px] w-full font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
+              onClick={() => navigate("/job-list")}
             >
               Find Jobs
               <svg

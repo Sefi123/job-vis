@@ -1,6 +1,7 @@
 import React from "react";
 import "./JobList.css";
 import JobCard from "../../components/JobCard";
+import { Input } from "@material-tailwind/react";
 
 const tags = [
   {
@@ -109,8 +110,88 @@ const tags = [
 
 const JobList = () => {
   return (
-    <div className="jobs-container mx-6">
-      <div>
+    <div className="jobs-container mx-2 max-w-[1324px] sm:m-auto">
+      <div className="p-4">
+        <div className="banner-input-wrapper flex justify-between p-3 bg-[#fff] rounded-xl mx-auto flex-wrap gap-y-3 md:gap-y-0">
+          <div className="w-[100%] md:w-[50%] relative banner-input-content">
+            <div class="absolute left-0 top-[50%] translate-y-[-50%]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="29"
+                viewBox="0 0 28 29"
+                fill="none"
+              >
+                <path
+                  d="M25.1184 24.3817L20.6372 19.9005C22.1352 18.1237 23.0417 15.8335 23.0417 13.3333C23.0417 7.70417 18.4625 3.125 12.8333 3.125C7.20417 3.125 2.625 7.70417 2.625 13.3333C2.625 18.9625 7.20417 23.5417 12.8333 23.5417C15.3335 23.5417 17.6237 22.6352 19.4005 21.1372L23.8816 25.6183C24.052 25.7887 24.276 25.875 24.5 25.875C24.724 25.875 24.948 25.7898 25.1184 25.6183C25.4602 25.2777 25.4602 24.7235 25.1184 24.3817ZM4.375 13.3333C4.375 8.669 8.169 4.875 12.8333 4.875C17.4977 4.875 21.2917 8.669 21.2917 13.3333C21.2917 17.9977 17.4977 21.7917 12.8333 21.7917C8.169 21.7917 4.375 17.9977 4.375 13.3333Z"
+                  fill="#4A4C56"
+                />
+              </svg>
+            </div>
+            <Input
+              label="Job Title or Keywords"
+              className="border-none rounded-none"
+            />
+          </div>
+          <div className="w-[100%] md:w-[50%] relative banner-input-content">
+            <div class="absolute left-0 md:left-2.5 top-[50%] translate-y-[-50%]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="29"
+                viewBox="0 0 28 29"
+                fill="none"
+              >
+                <path
+                  d="M13.9998 3.125C8.37067 3.125 3.7915 7.70417 3.7915 13.3333C3.7915 19.3043 9.27133 22.9233 12.8973 25.3184L13.5145 25.728C13.6615 25.826 13.8307 25.875 13.9998 25.875C14.169 25.875 14.3382 25.826 14.4852 25.728L15.1023 25.3184C18.7283 22.9233 24.2082 19.3043 24.2082 13.3333C24.2082 7.70417 19.629 3.125 13.9998 3.125ZM14.1387 23.8578L13.9998 23.9501L13.861 23.8578C10.3493 21.5385 5.5415 18.3628 5.5415 13.3333C5.5415 8.669 9.3355 4.875 13.9998 4.875C18.6642 4.875 22.4582 8.669 22.4582 13.3333C22.4582 18.3628 17.6492 21.5397 14.1387 23.8578ZM13.9998 9.54167C11.9092 9.54167 10.2082 11.2427 10.2082 13.3333C10.2082 15.424 11.9092 17.125 13.9998 17.125C16.0905 17.125 17.7915 15.424 17.7915 13.3333C17.7915 11.2427 16.0905 9.54167 13.9998 9.54167ZM13.9998 15.375C12.874 15.375 11.9582 14.4592 11.9582 13.3333C11.9582 12.2075 12.874 11.2917 13.9998 11.2917C15.1257 11.2917 16.0415 12.2075 16.0415 13.3333C16.0415 14.4592 15.1257 15.375 13.9998 15.375Z"
+                  fill="#4A4C56"
+                />
+              </svg>
+            </div>
+            <Input label="Location" className="border-none rounded-none" />
+          </div>
+        </div>
+        <div className="toggle-btn-container flex-wrap">
+          <label class="inline-flex items-center  cursor-pointer">
+            <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
+              HIB/OPT Friendly
+            </span>
+            <input type="checkbox" value="" class="sr-only peer" />
+            <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
+          </label>
+          <label class="inline-flex items-center  cursor-pointer">
+            <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
+              Remote
+            </span>
+            <input type="checkbox" value="" class="sr-only peer" />
+            <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
+          </label>
+          <label class="inline-flex items-center  cursor-pointer">
+            <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
+              Hybrid
+            </span>
+            <input type="checkbox" value="" class="sr-only peer" />
+            <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
+          </label>
+
+          <div class="relative">
+            <select class="peer h-full w-full rounded-[7px] bg-transparent px-3 py-2.5 font-sans text-lg font-normal text-blue-gray-700 outline-none">
+              <option value="brazil">Full-Time</option>
+              <option value="bucharest">Part-Time</option>
+              <option value="london">Remote</option>
+              <option value="washington">On-Site</option>
+            </select>
+          </div>
+
+          <div class="relative">
+            <select class="peer h-full w-full rounded-[7px] bg-transparent px-3 py-2.5 font-sans text-lg font-normal text-blue-gray-700 outline-none">
+              <option value="brazil">Software EVS</option>
+              <option value="bucharest">Bucharest</option>
+              <option value="london">London</option>
+              <option value="washington">Washington</option>
+            </select>
+          </div>
+        </div>
         <div className="tags-list">
           {tags.map((tag, index) => (
             <div key={index} className="tag-container">

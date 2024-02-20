@@ -23,22 +23,20 @@ function App() {
   return (
     <div>
       <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<Navigate replace to={checkProtectedRoute()} />}
-          />
-          <Route path="/auth/*" element={<AuthRoutes />} />
-          {/* <Route path="/app/*" element={<AppRoutes />} /> */}
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/job-list" element={<JobList />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/paid-user" element={<PaidMemberProfile />} />
-          <Route path="/membershipPlan" element={<MembershipPlan />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<Navigate replace to={checkProtectedRoute()} />}
+        />
+        <Route path="/auth/*" element={<AuthRoutes />} />
+        {/* <Route path="/app/*" element={<AppRoutes />} /> */}
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/job-list" element={<JobList />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/paid-user" element={<PaidMemberProfile />} />
+        <Route path="/membershipPlan" element={<MembershipPlan />} />
+      </Routes>
       <Footer />
     </div>
   );

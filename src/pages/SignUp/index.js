@@ -1,7 +1,9 @@
 import { Button } from "@material-tailwind/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   return (
     <div class="px-5 py-20 relative flex flex-col items-center justify-center text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">
       <h4 class="block font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -91,7 +93,11 @@ const SignUp = () => {
         </Button>
         <p class="block mt-4 font-sans text-base antialiased font-normal leading-relaxed text-center text-gray-700">
           Already have an account?
-          <a href="#" class="font-medium text-gray-900">
+          <a
+            href="#"
+            class="font-medium text-gray-900"
+            onClick={() => navigate("/auth")}
+          >
             Sign In
           </a>
         </p>
