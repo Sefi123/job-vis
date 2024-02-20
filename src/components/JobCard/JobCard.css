@@ -92,3 +92,9 @@
     color: var(--W, #fff);
   }
 }
+@media screen and (max-width: 767px) {
+  .jobCardButtons,
+  .detailsButton {
+    width: 50% !important;
+  }
+}
