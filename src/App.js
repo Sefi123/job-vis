@@ -18,7 +18,7 @@ function App() {
     // const token = Utils.getCurrentToken();
     // if (!token) return '/auth';
     // else return '/app';
-    return "auth";
+    return "home";
   };
   return (
     <div>
