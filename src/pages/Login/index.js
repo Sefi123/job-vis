@@ -1,8 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth";
+import { Button } from "@material-tailwind/react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
@@ -38,12 +43,15 @@ const Login = () => {
             Forget Password?
           </a>
           <div className="mt-6">
-            <button
+            <Button
               className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#164ED4] rounded-md hover:bg-[#164ED4] focus:outline-none focus:bg-[#164ED4]"
-              onClick={() => navigate("/home")}
+              onClick={() => {
+                dispatch(login());
+                navigate("/home");
+              }}
             >
               Login
-            </button>
+            </Button>
           </div>
         </form>
 

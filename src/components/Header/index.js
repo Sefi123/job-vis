@@ -14,11 +14,15 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/icons/logo.png";
 import Arrow from "../../assets/icons/arrow-up-right.png";
 import Profile from "../../assets/images/profile.png";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/auth";
 
 const Header = () => {
   const [openNav, setOpenNav] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const authState = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
@@ -79,20 +83,28 @@ const Header = () => {
             onClick={() => navigate("/home")}
           />
           <div className="hidden lg:block">
-            {loggedIn ? (
+            {authState?.isLoggedIn ? (
               <Menu>
                 <MenuHandler>
                   <img src={Profile} alt="profile" width={48} />
                 </MenuHandler>
                 <MenuList>
-                  <MenuItem onClick={() => navigate("profile")}>
+                  <MenuItem onClick={() => navigate("/profile")}>
                     Profile
                   </MenuItem>
-                  <MenuItem onClick={() => navigate("membershipPlan")}>
+                  <MenuItem onClick={() => navigate("/membershipPlan")}>
                     Membership
                   </MenuItem>
-                  <MenuItem onClick={() => navigate("paid-user")}>
+                  <MenuItem onClick={() => navigate("/paid-user")}>
                     Paid User
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      dispatch(logout());
+                      navigate("/auth");
+                    }}
+                  >
+                    Logout
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -138,7 +150,34 @@ const Header = () => {
           </IconButton>
         </div>
         <Collapse open={openNav}>
-          <NavList />
+          {authState?.isLoggedIn ? (
+            <Menu>
+              <MenuHandler>
+                <img src={Profile} alt="profile" width={48} />
+              </MenuHandler>
+              <MenuList>
+                <MenuItem onClick={() => navigate("/profile")}>
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/membershipPlan")}>
+                  Membership
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/paid-user")}>
+                  Paid User
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    dispatch(logout());
+                    navigate("/auth");
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <NavList />
+          )}
         </Collapse>
       </div>
     </Navbar>
