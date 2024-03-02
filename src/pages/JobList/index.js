@@ -153,10 +153,10 @@ const JobList = () => {
   const fetchJobs = async (currentPage = page, isFiltered = false) => {
     setLoading(true);
     const response = await fetchActiveJob(currentPage, parameters);
-    if (response?.status === 200) {
-      if (isFiltered) setJobs([...response.data.results]);
-      else setJobs([...jobs, ...response.data.results]);
-      setPage(response?.data?.next);
+    if (response?.results?.length > 0) {
+      if (isFiltered) setJobs([...response?.results]);
+      else setJobs([...jobs, ...response?.results]);
+      setPage(response?.next);
     } else setPage(null);
     setLoading(false);
     setIsRequest(false);

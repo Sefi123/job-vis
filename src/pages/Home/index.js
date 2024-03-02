@@ -15,8 +15,8 @@ const Home = () => {
 
   const fetchFeaturedJob = async () => {
     const response = await fetchFeaturedJobs();
-    if (response?.status === 200) {
-      setFeaturedJobs([...response.data.results]);
+    if (response?.results?.length > 0) {
+      setFeaturedJobs([...response?.results]);
     }
   };
 
