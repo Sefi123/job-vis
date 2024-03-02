@@ -45,10 +45,11 @@ const UserImpression = () => {
           return (
             <div className="UserImpressions-card bg-[#F9F9F8] rounded-[20px] p-[24px] pt-[32px]">
               <div className="UserImpressions-card-content">
-                <div className="flex items-center mt-[-28px] ml-[-32px]">
-                  <div className="UserImpressions-img translate-x-[-28px] translate-y-[-28px]">
+                {/* <div className="flex items-center mt-[-28px] ml-[-32px]"> */}
+                <div className="flex items-center">
+                  {/* <div className="UserImpressions-img translate-x-[-28px] translate-y-[-28px]">
                     <img src={item.userImg} alt="UserImpressions-img" />
-                  </div>
+                  </div> */}
                   <div className="UserImpressions-card-heading flex gap-[6px] flex-col">
                     <div className="rating-bar">
                       <Rating value={4} />
