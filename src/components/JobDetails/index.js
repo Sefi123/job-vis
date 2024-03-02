@@ -8,9 +8,10 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Bookmark from "../../assets/icons/bookmark.png";
+import parse from "html-react-parser";
 import "./jobDetails.css";
 
-const JobDetails = ({ open, handleClose }) => {
+const JobDetails = ({ open, handleClose, data }) => {
   return (
     <Dialog open={open} handler={handleClose} size="lg">
       <DialogHeader className="justify-end">
@@ -34,27 +35,43 @@ const JobDetails = ({ open, handleClose }) => {
           <div className="flex items-center justify-between mb-8">
             <div>
               <Typography variant="h5" className="jobDetail-title">
-                Sr. UI/UX Designer
+                {data?.job_name}
               </Typography>
               <div className="jobDetail-workType-container">
-                <div className="jobDetail-workType jobDetail-typeWithBorder">
-                  H1B Friendly
-                </div>
-                <div className="jobDetail-workType jobDetail-typeWithBorder">
-                  Remote
-                </div>
-                <div className="jobDetail-workType">Full Time</div>
+                {data?.job_sponsorship && (
+                  <div className="workType typeWithBorder">H1B Friendly</div>
+                )}
+                {data?.job_remote && (
+                  <div className="workType typeWithBorder capitalize">
+                    <div>Remote</div>
+                  </div>
+                )}
+                {data?.job_hybrid && (
+                  <div className="workType typeWithBorder capitalize">
+                    <div>Hybrid</div>
+                  </div>
+                )}
+                <div className="workType">{data?.job_commitment}</div>
               </div>
             </div>
-            <div>
-              <Typography className="jobDetail-salary-title">
-                Basic Salary
-              </Typography>
-              <div className="flex items-center">
-                <span className="jobDetail-salary">$1200.50</span>
-                <span className="jobDetail-salary-duration">/Month</span>
+            {data?.job_salary != null && (
+              <div>
+                <Typography className="jobDetail-salary-title">
+                  Basic Salary
+                </Typography>
+                <div className="flex items-center">
+                  <span className="jobDetailSalary">
+                    {data?.job_salary
+                      ?.split("-")
+                      ?.map((salary) => `$${salary}`)
+                      ?.join(" - ")}
+                    {data?.min_salary}
+                  </span>
+                  {/* <span className="jobDetail-salary">$1200.50</span>
+                <span className="jobDetail-salary-duration">/Month</span> */}
+                </div>
               </div>
-            </div>
+            )}
             <div className="flex items-center gap-4">
               <img
                 src={Bookmark}
@@ -71,14 +88,7 @@ const JobDetails = ({ open, handleClose }) => {
             <div>
               <div className="jobDetail-heading mb-3">Job Description</div>
               <div className="jobDetail-description">
-                We are seeking a highly skilled and experienced Senior UI/UX
-                Designer to join our dynamic team. The ideal candidate will be
-                responsible for creating visually stunning and intuitive user
-                interfaces while ensuring a seamless and enjoyable user
-                experience. As a Senior UI/UX Designer, you will collaborate
-                with cross-functional teams, including product managers,
-                developers, and other designers, to deliver high-quality design
-                solutions that meet both user needs and business objectives.
+                {parse(data?.job_description ?? "")}
               </div>
             </div>
 

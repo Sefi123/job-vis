@@ -74,6 +74,13 @@
   font-size: 14px;
 }
 
+.jobDetailSalary {
+  color: var(--Gray-Black-500, #1d1f2c);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 120%; /* 21.6px */
+}
+
 .jobDetail-heading {
   color: var(--Black-01, #1b2124);
   font-size: 20px;

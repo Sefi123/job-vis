@@ -27,6 +27,13 @@
   gap: 32px;
   justify-content: center;
 }
+
+.jobDurationList > span {
+  color: black;
+  font-size: 16px;
+  padding-top: 0px;
+}
+
 @media screen and (max-width: 767px) {
   .banner-input-content:last-child label,
   .banner-input-content:last-child input {

@@ -1,5 +1,5 @@
-import React from "react";
-import { Typography, Input } from "@material-tailwind/react";
+import React, { useState } from "react";
+import { Typography, Input, Select, Option } from "@material-tailwind/react";
 import "./bannerHome.css";
 import bannerImg from "../../assets/images/banner-background-image.png";
 import google from "../../assets/images/google.svg";
@@ -11,6 +11,56 @@ import { useNavigate } from "react-router-dom";
 
 const BannerHome = () => {
   const navigate = useNavigate();
+  const [parameters, setParameters] = useState({
+    title: "",
+    location: "",
+    workType: {
+      friendly: false,
+      remote: false,
+      hybrid: false,
+    },
+    duration: "Full-time",
+    work_field: [
+      "computer-science",
+      "health",
+      "fintech",
+      "education",
+      "transport",
+      "media",
+    ],
+  });
+
+  const handleTitle = (value) => {
+    setParameters({ ...parameters, title: value });
+  };
+
+  const handleLocation = (value) => {
+    setParameters({ ...parameters, location: value });
+  };
+
+  const handleWorkType = (e) => {
+    const { value, checked } = e.currentTarget;
+    if (value === "remote")
+      setParameters({
+        ...parameters,
+        workType: { ...parameters.workType, remote: checked },
+      });
+    else if (value === "friendly")
+      setParameters({
+        ...parameters,
+        workType: { ...parameters.workType, friendly: checked },
+      });
+    else
+      setParameters({
+        ...parameters,
+        workType: { ...parameters.workType, hybrid: checked },
+      });
+  };
+
+  const handleDuration = (value) => {
+    setParameters({ ...parameters, duration: value });
+  };
+
   return (
     <div
       className="bannerHome py-[40px] md:py-[80px]"
@@ -215,8 +265,13 @@ const BannerHome = () => {
                   </svg>
                 </div>
                 <Input
-                  label="Job Title or Keywords"
-                  className="border-none rounded-none"
+                  placeholder="Job Title or Keywords"
+                  className="border-none rounded-none placeholder:opacity-100"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  value={parameters?.title}
+                  onChange={(e) => handleTitle(e.currentTarget.value)}
                 />
               </div>
               <div className="w-[100%] md:w-[50%] relative banner-input-content">
@@ -234,39 +289,46 @@ const BannerHome = () => {
                     />
                   </svg>
                 </div>
-                <Input label="Location" className="border-none rounded-none" />
+                <Input
+                  placeholder="Location"
+                  className="border-none rounded-none placeholder:opacity-100"
+                  value={parameters?.location}
+                  onChange={(e) => handleLocation(e.currentTarget.value)}
+                />
               </div>
             </div>
             <div className="toggle-btn-container flex-wrap">
-              <label class="inline-flex items-center  cursor-pointer">
-                <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
-                  HIB/OPT Friendly
-                </span>
-                <input type="checkbox" value="" class="sr-only peer" />
-                <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
-              </label>
-              <label class="inline-flex items-center  cursor-pointer">
-                <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
-                  Remote
-                </span>
-                <input type="checkbox" value="" class="sr-only peer" />
-                <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
-              </label>
-              <label class="inline-flex items-center  cursor-pointer">
-                <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
-                  Hybrid
-                </span>
-                <input type="checkbox" value="" class="sr-only peer" />
-                <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
-              </label>
+              {Object.keys(parameters?.workType)?.map((work_type, index) => (
+                <label
+                  class="inline-flex items-center  cursor-pointer"
+                  key={index}
+                >
+                  <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300 capitalize">
+                    {index == 0 ? "HIB/OPT " + work_type : work_type}
+                  </span>
+                  <input
+                    type="checkbox"
+                    value={work_type}
+                    checked={parameters?.workType[work_type]}
+                    className="sr-only peer"
+                    onClick={(e) => handleWorkType(e)}
+                  />
+                  <div class="relative w-11 h-6 bg-[#D8D8D8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
+                </label>
+              ))}
 
               <div class="relative">
-                <select class="peer h-full w-full rounded-[7px] bg-transparent px-3 py-2.5 font-sans text-lg font-normal text-blue-gray-700 outline-none">
-                  <option value="brazil">Full-Time</option>
-                  <option value="bucharest">Bucharest</option>
-                  <option value="london">London</option>
-                  <option value="washington">Washington</option>
-                </select>
+                <Select
+                  variant="static"
+                  size="sm"
+                  placeholder="Select Duration"
+                  onChange={(e) => handleDuration(e)}
+                  value={parameters?.duration}
+                  className="jobDurationList"
+                >
+                  <Option value="Full-time">Full Time</Option>
+                  <Option value="Part-time">Part Time</Option>
+                </Select>
               </div>
 
               <div class="relative">
@@ -295,7 +357,9 @@ const BannerHome = () => {
             <button
               class="mx-auto my-[24px] md:my-[48px] flex justify-center items-center gap-[8px] select-none rounded-lg bg-[#164ED4] p-[16px] max-w-[222px] w-full font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
-              onClick={() => navigate("/job-list")}
+              onClick={() =>
+                navigate("/job-list", { state: { jobParameters: parameters } })
+              }
             >
               Find Jobs
               <svg

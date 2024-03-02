@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./JobList.css";
 import JobCard from "../../components/JobCard";
-import { Input } from "@material-tailwind/react";
+import { Input, Option, Select, Spinner } from "@material-tailwind/react";
+import { fetchActiveJob } from "../../services/jobs";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useLocation } from "react-router-dom";
 
 const tags = [
   {
@@ -109,6 +112,89 @@ const tags = [
 ];
 
 const JobList = () => {
+  const Location = useLocation();
+  const { jobParameters } = Location.state;
+  const [jobs, setJobs] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isRequest, setIsRequest] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [parameters, setParameters] = useState(
+    jobParameters ?? {
+      title: "",
+      location: "",
+      workType: {
+        friendly: false,
+        remote: false,
+        hybrid: false,
+      },
+      duration: "Full-time",
+      work_field: [
+        "computer-science",
+        "health",
+        "fintech",
+        "education",
+        "transport",
+        "media",
+      ],
+    }
+  );
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isRequest) fetchJobs(1, true);
+  }, [isRequest]);
+
+  const fetchJobs = async (currentPage = page, isFiltered = false) => {
+    setLoading(true);
+    const response = await fetchActiveJob(currentPage, parameters);
+    if (response?.status === 200) {
+      if (isFiltered) setJobs([...response.data.results]);
+      else setJobs([...jobs, ...response.data.results]);
+      setPage(response?.data?.next);
+    } else setPage(null);
+    setLoading(false);
+    setIsRequest(false);
+  };
+
+  const handleTitle = (value) => {
+    setParameters({ ...parameters, title: value });
+  };
+
+  const handleLocation = (value) => {
+    setParameters({ ...parameters, location: value });
+  };
+
+  const handleWorkType = (e) => {
+    const { value, checked } = e.currentTarget;
+    if (value === "remote")
+      setParameters({
+        ...parameters,
+        workType: { ...parameters.workType, remote: checked },
+      });
+    else if (value === "friendly")
+      setParameters({
+        ...parameters,
+        workType: { ...parameters.workType, friendly: checked },
+      });
+    else
+      setParameters({
+        ...parameters,
+        workType: { ...parameters.workType, hybrid: checked },
+      });
+    setIsRequest(true);
+  };
+
+  const handleDuration = (value) => {
+    setParameters({ ...parameters, duration: value });
+    setIsRequest(true);
+  };
+
   return (
     <div className="jobs-container mx-2 max-w-[1324px] sm:m-auto">
       <div className="p-4">
@@ -129,8 +215,18 @@ const JobList = () => {
               </svg>
             </div>
             <Input
-              label="Job Title or Keywords"
-              className="border-none rounded-none"
+              placeholder="Job Title or Keywords"
+              className="border-none rounded-none placeholder:opacity-100"
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
+              onChange={(e) => handleTitle(e.currentTarget.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setIsRequest(true);
+                }
+              }}
+              value={parameters?.title}
             />
           </div>
           <div className="w-[100%] md:w-[50%] relative banner-input-content">
@@ -148,39 +244,62 @@ const JobList = () => {
                 />
               </svg>
             </div>
-            <Input label="Location" className="border-none rounded-none" />
+            <Input
+              placeholder="Location"
+              className="border-none rounded-none placeholder:opacity-100"
+              value={parameters?.location}
+              onChange={(e) => handleLocation(e.currentTarget.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setIsRequest(true);
+                }
+              }}
+            />
           </div>
         </div>
         <div className="toggle-btn-container flex-wrap">
-          <label class="inline-flex items-center  cursor-pointer">
+          {/* <label class="inline-flex items-center  cursor-pointer">
             <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
               HIB/OPT Friendly
             </span>
             <input type="checkbox" value="" class="sr-only peer" />
             <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
-          </label>
-          <label class="inline-flex items-center  cursor-pointer">
-            <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
-              Remote
-            </span>
-            <input type="checkbox" value="" class="sr-only peer" />
-            <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
-          </label>
-          <label class="inline-flex items-center  cursor-pointer">
+          </label> */}
+          {Object.keys(parameters?.workType)?.map((work_type, index) => (
+            <label class="inline-flex items-center  cursor-pointer" key={index}>
+              <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300 capitalize">
+                {index == 0 ? "HIB/OPT " + work_type : work_type}
+              </span>
+              <input
+                type="checkbox"
+                value={work_type}
+                checked={parameters?.workType[work_type]}
+                className="sr-only peer"
+                onClick={(e) => handleWorkType(e)}
+              />
+              <div class="relative w-11 h-6 bg-[#D8D8D8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
+            </label>
+          ))}
+          {/* <label class="inline-flex items-center  cursor-pointer">
             <span class="mr-3 text-lg font-medium text-gray-900 dark:text-gray-300">
               Hybrid
             </span>
             <input type="checkbox" value="" class="sr-only peer" />
             <div class="relative w-11 h-6 bg-[#E8E8E8] rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F54EB]"></div>
-          </label>
+          </label> */}
 
           <div class="relative">
-            <select class="peer h-full w-full rounded-[7px] bg-transparent px-3 py-2.5 font-sans text-lg font-normal text-blue-gray-700 outline-none">
-              <option value="brazil">Full-Time</option>
-              <option value="bucharest">Part-Time</option>
-              <option value="london">Remote</option>
-              <option value="washington">On-Site</option>
-            </select>
+            <Select
+              variant="static"
+              size="sm"
+              placeholder="Select Duration"
+              onChange={(e) => handleDuration(e)}
+              value={parameters?.duration}
+              className="jobDurationList"
+            >
+              <Option value="Full-time">Full Time</Option>
+              <Option value="Part-time">Part Time</Option>
+            </Select>
           </div>
 
           <div class="relative">
@@ -215,11 +334,37 @@ const JobList = () => {
           </svg>
           <p className="all-jobs-title">All Jobs</p>
         </div>
-        <div className="grid grid-cols-1 gap-8 mb-4 lg:grid-cols-2 xl:grid-cols-3">
-          {tags.map((tag, index) => (
-            <JobCard />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex items-center justify-center h-96">
+            <Spinner color="blue" className="h-10 w-10" />
+          </div>
+        ) : (
+          <InfiniteScroll
+            dataLength={jobs?.length} //This is important field to render the next data
+            next={fetchJobs}
+            hasMore={page != null}
+            loader={
+              <div className="flex items-center justify-center">
+                <Spinner color="blue" className="h-10 w-10" />
+              </div>
+            }
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                {jobs?.length > 0 ? (
+                  <b>You have reached the end of list</b>
+                ) : (
+                  <b>No Data Found</b>
+                )}
+              </p>
+            }
+            className="!overflow-hidden"
+          >
+            <div className="grid grid-cols-1 gap-8 mb-4 lg:grid-cols-2 xl:grid-cols-3">
+              {jobs?.length > 0 &&
+                jobs?.map((job, index) => <JobCard key={index} job={job} />)}
+            </div>
+          </InfiniteScroll>
+        )}
       </div>
     </div>
   );
