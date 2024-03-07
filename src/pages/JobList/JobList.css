@@ -27,6 +27,11 @@
   cursor: pointer;
 }
 
+.selected-tag {
+  background-color: #2f54eb !important;
+  color: #fff !important;
+}
+
 .all-jobs-title {
   color: var(--Grayscale-60, #636366);
   font-size: 20px;

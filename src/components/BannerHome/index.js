@@ -15,11 +15,12 @@ const BannerHome = () => {
     title: "",
     location: "",
     workType: {
-      friendly: false,
+      friendly: true,
       remote: false,
       hybrid: false,
     },
     duration: "Full-time",
+    department: "software-engineering",
     work_field: [
       "computer-science",
       "health",
@@ -332,12 +333,36 @@ const BannerHome = () => {
               </div>
 
               <div class="relative">
-                <select class="peer h-full w-full rounded-[7px] bg-transparent px-3 py-2.5 font-sans text-lg font-normal text-blue-gray-700 outline-none">
-                  <option value="brazil">Software EVS</option>
-                  <option value="bucharest">Bucharest</option>
-                  <option value="london">London</option>
-                  <option value="washington">Washington</option>
-                </select>
+                <Select
+                  variant="static"
+                  size="sm"
+                  value={parameters?.department}
+                  onChange={(value) =>
+                    setParameters({ ...parameters, department: value })
+                  }
+                  placeholder="Select Field"
+                  className="jobDurationList"
+                >
+                  <Option value="software-engineering">
+                    Software Engineering
+                  </Option>
+                  <Option value="engineering">Engineering</Option>
+                  <Option value="marketing">Marketing</Option>
+                  <Option value="design">Design</Option>
+                  <Option value="product">Product</Option>
+                  <Option value="product-management">Product Management</Option>
+                  <Option value="finance">Finance</Option>
+                  <Option value="data-science">Data Science</Option>
+                  <Option value="recruiting-hr">Recruiting & HR</Option>
+                  <Option value="administrative-services">
+                    Administrative Services
+                  </Option>
+                  <Option value="legal">Legal</Option>
+                  <Option value="customer-services">Customer Services</Option>
+                  <Option value="business-operations">
+                    Business Operations
+                  </Option>
+                </Select>
               </div>
             </div>
             <div className="absolute right-0 top-[100%] z-[-1] hidden md:block">

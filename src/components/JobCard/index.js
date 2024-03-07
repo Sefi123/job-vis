@@ -32,7 +32,9 @@ const JobCard = ({ appliedJobs, job }) => {
           <Typography variant="h5" className="card-title sm:!text-[2rem]">
             {job?.job_name}
           </Typography>
-          <Typography className="card-tag">@{job?.company_name}</Typography>
+          <Typography className="card-tag capitalize">
+            @{job?.company_name}
+          </Typography>
           <Typography className="flex items-center gap-4 text-black">
             <div>Experience Level: </div>
             <div className="font-semibold">{job?.job_yoe}</div>

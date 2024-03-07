@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import JobCard from "../../components/JobCard/index";
-import { Typography } from "@material-tailwind/react";
+import { Spinner, Typography } from "@material-tailwind/react";
 import BannerHome from "../../components/BannerHome";
 import SponsoredBlock from "../../components/SponsoredBlock";
 import UserImpression from "../../components/UserImpression";
@@ -8,6 +8,7 @@ import { fetchFeaturedJobs } from "../../services/jobs";
 
 const Home = () => {
   const [featuredJobs, setFeaturedJobs] = useState([]);
+  const [spinner, setSpinner] = useState(true);
 
   useEffect(() => {
     fetchFeaturedJob();
@@ -15,9 +16,10 @@ const Home = () => {
 
   const fetchFeaturedJob = async () => {
     const response = await fetchFeaturedJobs();
-    if (response?.results?.length > 0) {
-      setFeaturedJobs([...response?.results]);
+    if (response?.status === 200) {
+      setFeaturedJobs([...response.data.results]);
     }
+    setSpinner(false);
   };
 
   return (
@@ -31,12 +33,19 @@ const Home = () => {
           >
             <span className="text-[#164ED4]">Featured</span> Jobs
           </Typography>
-          <div className="row grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredJobs?.length > 0 &&
-              featuredJobs?.map(
-                (job, index) => index <= 2 && <JobCard job={job} key={index} />
-              )}
-          </div>
+          {spinner ? (
+            <div className="flex items-center justify-center h-20">
+              <Spinner color="blue" className="h-10 w-10" />
+            </div>
+          ) : (
+            <div className="row grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {featuredJobs?.length > 0 &&
+                featuredJobs?.map(
+                  (job, index) =>
+                    index <= 2 && <JobCard job={job} key={index} />
+                )}
+            </div>
+          )}
         </div>
       </div>
       <div className="sponsored-block py-[40px] md:py-[80px] bg-[#fff]">

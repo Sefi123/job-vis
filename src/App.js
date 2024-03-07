@@ -1,5 +1,11 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import AuthRoutes from "./routes/AuthRoutes";
 import Home from "./pages/Home";
@@ -14,6 +20,8 @@ import MembershipPlan from "./pages/MembershipPlan";
 import SignUp from "./pages/SignUp";
 
 function App() {
+  const location = useLocation();
+
   const checkProtectedRoute = () => {
     // const token = Utils.getCurrentToken();
     // if (!token) return '/auth';
@@ -37,7 +45,7 @@ function App() {
         <Route path="/paid-user" element={<PaidMemberProfile />} />
         <Route path="/membershipPlan" element={<MembershipPlan />} />
       </Routes>
-      <Footer />
+      {location.pathname !== "/job-list" && <Footer />}
     </div>
   );
 }
