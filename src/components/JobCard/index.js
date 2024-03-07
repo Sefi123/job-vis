@@ -27,7 +27,7 @@ const JobCard = ({ appliedJobs, job }) => {
   return (
     <>
       <JobDetails open={open} handleClose={handleClose} data={modalData} />
-      <Card className="mt-6 border border-[#E8EDFB] w-full">
+      <Card className="mt-6 border border-[#E8EDFB] w-full h-fit">
         <CardBody className="flex flex-col gap-3">
           <Typography variant="h5" className="card-title sm:!text-[2rem]">
             {job?.job_name}
